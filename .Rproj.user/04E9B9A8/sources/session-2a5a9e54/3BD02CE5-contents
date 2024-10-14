@@ -26,10 +26,11 @@ RUN wget -O JAGS-4.3.2.tar.gz https://sourceforge.net/projects/mcmc-jags/files/J
 ENV JAGS_HOME /usr/local
 
 # Install R packages
-RUN Rscript -e "install.packages(c('rjags', 'yaml'), repos='https://cloud.r-project.org')"
+RUN Rscript -e "install.packages(c('rjags', 'yaml', 'targets', 'tidyverse'), repos='https://cloud.r-project.org')"
 
 # Set the default command to run the R script
-CMD ["Rscript", "sim-binomial-bayes.R"]
+CMD ["Rscript", "-e", "targets::tar_make()"]
+#CMD ["Rscript", "sim-binomial-bayes.R"]
 
 
 
