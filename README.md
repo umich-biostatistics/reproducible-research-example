@@ -7,9 +7,9 @@ The workshop covers tools and best practices for reproducible research
 ## Dependencies
 
 - **Docker**
-  - [Docker Desktop](https://docs.docker.com/get-started/get-docker/) OR
-  - [Docker CE/Docker Engine](https://docs.docker.com/engine/install/)
-  - Alternatively, Mac users should [OrbStack](https://orbstack.dev/)
+  - Option 1: [Docker Desktop](https://docs.docker.com/get-started/get-docker/)
+  - Option 2: [Docker CE/Docker Engine](https://docs.docker.com/engine/install/)
+  - Mac users: check out [OrbStack](https://orbstack.dev/) as an alternative
 - GNU make
   - This should be available on most Unix-like/Linux systems
   - [Windows Users](https://gnuwin32.sourceforge.net/packages/make.htm)
