@@ -1,5 +1,14 @@
+# macOS system files
 .DS_Store
+
+# RStudio project files
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
+
+# Results and report files
+results/
+doc/report_files/
+doc/report.html
+_targets/
