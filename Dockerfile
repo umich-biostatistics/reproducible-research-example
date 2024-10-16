@@ -65,6 +65,14 @@ RUN wget -O JAGS-4.3.2.tar.gz https://sourceforge.net/projects/mcmc-jags/files/J
 # Set the JAGS_HOME environment variable
 ENV JAGS_HOME /usr/local
 
+# Install Quarto CLI
+RUN apt-get update && \
+    apt-get install -y curl && \
+    curl -o quarto.deb -L https://quarto.org/download/latest/quarto-linux-amd64.deb && \
+    apt-get install -y ./quarto.deb && \
+    rm quarto.deb && \
+    apt-get clean
+
 # Install renv package and restore environment
 RUN R -e "renv::restore()"
 
