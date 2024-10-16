@@ -1,6 +1,26 @@
-# README
+# U-M Biostat Reproducible Research Example
 
-## Close repository to your local computer
+This example was create for a workshop given by Mike Kleinsasser and Jacob Gladfelter.
+
+The workshop covers tools and best practices for reproducible research
+
+## Dependencies
+
+- **Docker**
+  - Option 1: [Docker Desktop](https://docs.docker.com/get-started/get-docker/)
+  - Option 2: [Docker CE/Docker Engine](https://docs.docker.com/engine/install/)
+  - Mac users: check out [OrbStack](https://orbstack.dev/) as an alternative
+- GNU make
+  - This should be available on most Unix-like/Linux systems
+  - [Windows Users](https://gnuwin32.sourceforge.net/packages/make.htm)
+
+## Use
+
+Simply clone the repository and run `make` from the terminal.
+
+---
+
+# Clone repository to your local computer
 
 git clone ...
 
