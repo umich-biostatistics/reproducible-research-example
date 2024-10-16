@@ -1,4 +1,4 @@
-# Makefile
+# Makefile to build and run docker image
 
 # Variables
 IMAGE_NAME = reproducible-research/my_r_image
