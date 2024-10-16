@@ -16,8 +16,8 @@ list(
     tar_target(
         simulation,
         {
-            system("Rscript sim-binomial-bayes.R")
-            "posterior_summary.csv"
+            system("Rscript R/sim-binomial-bayes.R")
+            "results/posterior_summary.csv"
         },
         format = "file"
     )

@@ -78,5 +78,5 @@ summary_df =
     arrange(parameter)
 
 # Write the summary statistics to a CSV file
-write_csv(summary_df, "posterior_summary.csv")
+write_csv(summary_df, "results/posterior_summary.csv")
 
