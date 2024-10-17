@@ -5,7 +5,6 @@ posterior_summary =
     "results/posterior_summary.csv" |> 
     read_csv()
 
-
 posterior_plot = 
     posterior_summary |> 
     ggplot() +
