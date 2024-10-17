@@ -12,3 +12,4 @@ results/
 doc/report_files/
 doc/report.html
 _targets/
+/.quarto/

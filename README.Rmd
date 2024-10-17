@@ -22,7 +22,7 @@ renv::init()
 Install All Required Packages:
 
 ```{r, eval = FALSE}
-install.packages(c("rjags", "yaml", "tidyverse", "targets"))
+install.packages(c("rjags", "yaml", "tidyverse", "targets", "quarto"))
 ```
 
 Run renv::snapshot():
@@ -58,3 +58,16 @@ docker build -t my_r_image .
 docker run --rm -it my_r_image
 
 docker run -v $(pwd)/config.yaml:/usr/local/bin/config.yaml my_r_image
+
+
+Current docker run commands:
+
+
+docker build --platform linux/amd64 -t my_r_image .
+
+docker run --platform linux/amd64 -it my_r_image
+
+
+
+
+
