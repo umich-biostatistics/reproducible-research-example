@@ -1,7 +1,7 @@
 # Makefile to build and run docker image
 
 # Variables
-IMAGE_NAME = umich-biostatistics/reproducible-research-example:sim-binom-bayes
+IMAGE_NAME = umich-biostatistics/reproducible-research-example:deploy-package
 RESULTS_DIR = ./results/
 
 # Phony targets (not files)
@@ -30,4 +30,4 @@ docker_run:
 
 # Pull from GHCR and run
 docker_pull:
-	docker pull ghcr.io/umich-biostatistics/reproducible-research-example:sim-binom-bayes
+	docker pull ghcr.io/umich-biostatistics/reproducible-research-example:deploy-package
