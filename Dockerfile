@@ -17,7 +17,8 @@ WORKDIR /usr/src/app
 COPY . /usr/src/app
 
 # Install renv package and restore environment
-RUN echo 'options(Ncpus = as.integer(system("/usr/bin/nproc", intern = TRUE)) - 1)' >> /usr/local/lib/R/etc/Rprofile.site \
+RUN echo 'options(Ncpus = max(as.integer(system("/usr/bin/nproc", intern = TRUE)) - 1, 1))' >> "${R_HOME}/etc/Rprofile.site" \
+    && echo 'export MAKEFLAGS="-j$(( $(nproc) > 1 ? $(nproc) - 1 : 1 ))"' >> /etc/profile.d/makeflags.sh \
     && R -e "renv::restore()"
 
 # Set the default command to run the R script
