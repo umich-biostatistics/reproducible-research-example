@@ -1360,6 +1360,27 @@
       ],
       "Hash": "213b6b8ed5afbf934843e6c3b090d418"
     },
+    "tarchetypes": {
+      "Package": "tarchetypes",
+      "Version": "0.10.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "dplyr",
+        "fs",
+        "parallel",
+        "rlang",
+        "secretbase",
+        "targets",
+        "tibble",
+        "tidyselect",
+        "utils",
+        "vctrs",
+        "withr"
+      ],
+      "Hash": "554afb784cbe615ae628dfed026cf77f"
+    },
     "targets": {
       "Package": "targets",
       "Version": "1.8.0",
