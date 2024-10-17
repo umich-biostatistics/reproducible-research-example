@@ -41,7 +41,7 @@ RUN ARCHITECTURE=$(dpkg --print-architecture) && \
     rm quarto-1.5.57-linux-*.deb
 
 # Set the JAGS_HOME environment variable
-ENV JAGS_HOME /usr/local
+#ENV JAGS_HOME /usr/local
 
 # Install renv package and restore environment
 RUN R -e "renv::restore()"
