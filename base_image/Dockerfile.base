@@ -30,9 +30,3 @@ RUN ARCHITECTURE=$(dpkg --print-architecture) && \
 
 # Install renv package and restore environment
 RUN R -e "renv::restore()"
-
-# Set the default command to run the R script
-ENTRYPOINT ["Rscript", "-e", "targets::tar_make()"]
-
-# For debugging
-#ENTRYPOINT ["R"]

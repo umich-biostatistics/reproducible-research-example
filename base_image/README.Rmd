@@ -1,0 +1,29 @@
+# Instructions to build a custom base image
+
+Get a Dockerhub account.
+
+Build for amd64. Replace your_dockerhub_username with personal username.
+
+```{bash, eval = FALSE}
+docker build --platform linux/amd64 -f base_image/Dockerfile.base -t your_dockerhub_username/sim-binom-bayes-base-image:latest .
+```
+
+For example, I used:
+
+```{bash, eval = FALSE}
+docker build --platform linux/amd64 -f base_image/Dockerfile.base -t mkleinsa/sim-binom-bayes-base-image:latest .
+```
+
+Once built, push the image to Docker Hub as usual:
+
+Login to Docker if needed..
+
+```{bash, eval = FALSE}
+docker login
+```
+
+Push:
+
+```{bash, eval = FALSE}
+docker push your_dockerhub_username/sim-binom-bayes-base-image:latest
+```

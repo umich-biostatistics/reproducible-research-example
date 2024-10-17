@@ -42,7 +42,7 @@ renv::init()
 Install All Required Packages:
 
 ```{r, eval = FALSE}
-install.packages(c("rjags", "yaml", "tidyverse", "targets"))
+install.packages(c("rjags", "yaml", "tidyverse", "targets", "quarto"))
 ```
 
 Run renv::snapshot():
@@ -78,3 +78,24 @@ docker build -t my_r_image .
 docker run --rm -it my_r_image
 
 docker run -v $(pwd)/config.yaml:/usr/local/bin/config.yaml my_r_image
+
+
+## Current docker run commands:
+
+Build:
+
+```{bash, eval = FALSE}
+docker build --platform linux/amd64 -t sim_binom_bayes .
+```
+
+Run:
+
+```{bash, eval = FALSE}
+docker run --platform linux/amd64 sim_binom_bayes
+```
+
+For interactive mode:
+
+```{bash, eval = FALSE}
+docker run --platform linux/amd64 -it sim_binom_bayes
+```
