@@ -1,18 +1,10 @@
 library(targets)
+library(tarchetypes)
 
-tar_option_set(packages = c("rjags", "yaml", "tidyverse"))
+tar_option_set(packages = c("rjags", "yaml", "tidyverse", "quarto", "tarchetypes"))
 
 # Define the pipeline
 list(
-    # Load and prepare data
-    # tar_target(data, read.csv("data.csv")),
-    
-    # Process data (e.g., filter or transform)
-    # tar_target(processed_data, dplyr::filter(data, value > 10)),
-    
-    # Run a simulation or analysis
-    # tar_target(simulation_results, simulate_function(processed_data)),
-    
     tar_target(
         simulation,
         {
@@ -20,11 +12,44 @@ list(
             "results/posterior_summary.csv"
         },
         format = "file"
-    )
+    ),
+    
+    tar_target(
+        plot,
+        {
+            simulation
+            system("Rscript R/plot-binomial-bayes.R")
+            "results/posterior-samples.rda"
+        },
+        format = "file"
+    ),
+    
+    tar_target(
+        copied_posterior_samples,
+        {
+            plot
+            file.copy(from = "results/posterior-samples.rda", 
+                      to = "posterior-samples.rda", 
+                      overwrite = TRUE)
+            "posterior-samples.rda"
+        },
+        format = "file"
+    ),
     
     # Generate a report
-    # tar_target(report, {
-    #     quarto::quarto_render("report.qmd")
-    #     "report.html"  # Return the output filename for tracking
-    # })
+    # tar_target(
+    #     report,
+    #     {
+    #         copied_posterior_samples
+    #         system("quarto render doc/report.qmd")
+    #         "doc/report.qmd"
+    #     },
+    #     format = "file"
+    # ),
+    
+    tar_quarto(
+        report,
+        "doc/report.qmd",
+        execute_params = list(your_param = copied_posterior_samples)
+    )
 )

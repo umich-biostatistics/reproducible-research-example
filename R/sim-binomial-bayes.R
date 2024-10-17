@@ -16,11 +16,11 @@ model {
   for (i in 1:N) {
     # Logistic regression likelihood for binary classification
     y[i] ~ dbern(p[i])
-    logit(p[i]) = beta0 + inprod(beta[1:15], x[i,])
+    logit(p[i]) = beta_0 + inprod(beta[1:15], x[i,])
   }
   
   # Priors for the intercept and regression coefficients
-  beta0 ~ dnorm(0, 0.001)
+  beta_0 ~ dnorm(0, 0.001)
   for (j in 1:15) {
     beta[j] ~ dnorm(0, 0.001)
   }
@@ -31,8 +31,9 @@ model {
 set.seed(seed)
 N = 1000  # Number of observations
 x = matrix(rnorm(N * 15), nrow = N, ncol = 15)  # 15-dimensional input features
-true_beta = c(1.5, -0.5, 0.8, -1.2, 0.3, 0.7, -0.8, 0.2, 1.1, -0.4, 0.9, 1.3, -1.1, 0.5, -0.7)
-true_beta0 = -0.2
+true_beta_pars = read_csv("data/true_beta_pars.csv")
+true_beta0 = true_beta_pars[["true_beta"]][1]
+true_beta = true_beta_pars[["true_beta"]][-1]
 logit_p = true_beta0 + x %*% true_beta
 p = 1 / (1 + exp(-logit_p))
 y = rbinom(N, size = 1, prob = p)  # Binary outcome based on probabilities
@@ -49,13 +50,17 @@ model = jags.model(textConnection(model_string), data = data_list, n.chains = 3,
 update(model, n.burn)  # Burn-in
 
 # Sample from the posterior
-samples = coda.samples(model, variable.names = c("beta0", "beta"), n.iter = n.sampling)
+samples = coda.samples(model, variable.names = c("beta_0", "beta"), n.iter = n.sampling)
 
 # Posterior summaries
 summary(samples)
 
 # Convert coda samples into a data frame
-samples_df = as.data.frame(as.matrix(samples))
+samples_df = 
+    samples |> 
+    as.matrix() |> 
+    as.data.frame()
+    
 
 # Calculate summary statistics for each parameter
 summary_df = 
@@ -75,7 +80,17 @@ summary_df =
         names_from = stat,
         values_from = value
     ) |>
-    arrange(parameter)
+    mutate(
+        parameter = 
+            parameter |> 
+            str_replace_all("\\[|\\]", "_") |> 
+            str_remove("_$")
+    ) |> 
+    arrange(parameter) |> 
+    left_join(
+        true_beta_pars,
+        by = "parameter"
+    )
 
 # Write the summary statistics to a CSV file
 write_csv(summary_df, "results/posterior_summary.csv")
