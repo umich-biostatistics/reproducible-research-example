@@ -8,7 +8,7 @@
 .Ruserdata
 
 # Results and report files
-results/
+results/*
 doc/report_files/
 doc/report.html
 _targets/
