@@ -60,14 +60,22 @@ docker run --rm -it my_r_image
 docker run -v $(pwd)/config.yaml:/usr/local/bin/config.yaml my_r_image
 
 
-Current docker run commands:
+## Current docker run commands:
 
+Build:
 
-docker build --platform linux/amd64 -t my_r_image .
+```{bash, eval = FALSE}
+docker build --platform linux/amd64 -t sim_binom_bayes .
+```
 
-docker run --platform linux/amd64 -it my_r_image
+Run:
 
+```{bash, eval = FALSE}
+docker run --platform linux/amd64 sim_binom_bayes
+```
 
+For interactive mode:
 
-
-
+```{bash, eval = FALSE}
+docker run --platform linux/amd64 -it sim_binom_bayes
+```

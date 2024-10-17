@@ -394,9 +394,15 @@ scratch, start by installing these dependencies:</p>
 <p>docker run –rm -it my_r_image</p>
 <p>docker run -v $(pwd)/config.yaml:/usr/local/bin/config.yaml
 my_r_image</p>
-<p>Current docker run commands:</p>
-<p>docker build –platform linux/amd64 -t my_r_image .</p>
-<p>docker run –platform linux/amd64 -it my_r_image</p>
+</div>
+<div id="current-docker-run-commands" class="section level2">
+<h2>Current docker run commands:</h2>
+<p>Build:</p>
+<pre class="bash"><code>docker build --platform linux/amd64 -t sim_binom_bayes .</code></pre>
+<p>Run:</p>
+<pre class="bash"><code>docker run --platform linux/amd64 sim_binom_bayes</code></pre>
+<p>For interactive mode:</p>
+<pre class="bash"><code>docker run --platform linux/amd64 -it sim_binom_bayes</code></pre>
 </div>
 </div>
 

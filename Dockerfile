@@ -8,4 +8,7 @@ WORKDIR /usr/src/app
 COPY . /usr/src/app
 
 # Set the default command to run the R script
-ENTRYPOINT ["Rscript", "-e", "targets::tar_make()"]
+#ENTRYPOINT ["Rscript", "-e", "targets::tar_make()"]
+
+# For debugging
+ENTRYPOINT ["R"]
