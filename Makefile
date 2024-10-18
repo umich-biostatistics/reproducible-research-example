@@ -1,8 +1,10 @@
 # Makefile to build and run docker image
 
 # Variables
-IMAGE_NAME = umich-biostatistics/reproducible-research-example:deploy-package
+IMAGE_NAME = reproducible-research-example:deploy-package
+GHCR_IMAGE = ghcr.io/umich-biostatistics/$(IMAGE_NAME)
 RESULTS_DIR = ./results/
+DOC_DIR = ./doc/
 
 # Phony targets (not files)
 .PHONY: help all run_local docker_build docker_run docker_pull
@@ -11,8 +13,8 @@ help:
 	@echo "Makefile Usage:"
 	@echo "  make run_local        - Run the R script locally."
 	@echo "  make docker_build     - Build a Docker image from the Dockerfile."
-	@echo "  make docker_run       - Run the Docker image built locally."
-	@echo "  make docker_pull      - Pull a remote Docker image and run it."
+	@echo "  make docker_run       - Run the Docker image, pull if not found."
+	@echo "  make docker_pull      - Pull a remote Docker image."
 
 # Default target
 all: help
@@ -24,10 +26,17 @@ run_local:
 docker_build:
 	docker build -t $(IMAGE_NAME) .
 
-# Run existing Docker container
 docker_run:
-	docker run --rm -v $(RESULTS_DIR):/usr/src/app/results/ $(IMAGE_NAME)
+	@if docker image ls | grep -q ^reproducible-research-example; then \
+		echo "Found local image $(IMAGE_NAME). Running it..."; \
+		docker run --rm -v $(RESULTS_DIR):/usr/src/app/results/ -v $(DOC_DIR):/usr/src/app/doc/ $(IMAGE_NAME); \
+	else \
+		echo "Image $(IMAGE_NAME) not found locally. Pulling from GHCR..."; \
+		$(MAKE) docker_pull; \
+		echo "Running pulled image..."; \
+		docker run --rm -v $(RESULTS_DIR):/usr/src/app/results/ -v $(DOC_DIR):/usr/src/app/doc/ $(GHCR_IMAGE); \
+	fi
 
-# Pull from GHCR and run
+# Pull image from GHCR
 docker_pull:
-	docker pull ghcr.io/umich-biostatistics/reproducible-research-example:deploy-package
+	docker pull $(GHCR_IMAGE)
