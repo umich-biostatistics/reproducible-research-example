@@ -4,6 +4,7 @@
 IMAGE_NAME = reproducible-research-example:deploy-package
 GHCR_IMAGE = ghcr.io/umich-biostatistics/$(IMAGE_NAME)
 RESULTS_DIR = ./results/
+DOC_DIR = ./doc/
 
 # Phony targets (not files)
 .PHONY: help all run_local docker_build docker_run docker_pull
@@ -16,21 +17,21 @@ help:
 	@echo "  make docker_pull      - Pull a remote Docker image."
 
 # Default target
-all: run
+all: docker_run
 
 # Build the Docker image
-build:
+docker_build:
 	docker build -t $(IMAGE_NAME) .
 
 docker_run:
-	@if docker image ls | grep $(IMAGE_NAME); then \
+	@if docker image ls | grep ^reproducible-research-example; then \
 		echo "Found local image $(IMAGE_NAME). Running it..."; \
-		docker run --rm -v $(RESULTS_DIR):/usr/src/app/results/ $(IMAGE_NAME); \
+		docker run --rm -v $(RESULTS_DIR):/usr/src/app/results/ -v $(DOC_DIR):/usr/src/app/doc/ $(IMAGE_NAME); \
 	else \
 		echo "Image $(IMAGE_NAME) not found locally. Pulling from GHCR..."; \
 		$(MAKE) docker_pull; \
 		echo "Running pulled image..."; \
-		docker run --rm -v $(RESULTS_DIR):/usr/src/app/results/ $(IMAGE_NAME); \
+		docker run --rm -v $(RESULTS_DIR):/usr/src/app/results/ -v $(DOC_DIR):/usr/src/app/doc/ $(GHCR_IMAGE); \
 	fi
 
 # Pull image from GHCR
