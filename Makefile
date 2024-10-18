@@ -11,7 +11,7 @@ DOC_DIR = ./doc/
 
 help:
 	@echo "Makefile Usage:"
-	@echo "  make run_local        - Run the R script locally."
+	@echo "  make local        - Run the R script locally."
 	@echo "  make docker_build     - Build a Docker image from the Dockerfile."
 	@echo "  make docker_run       - Run the Docker image, pull if not found."
 	@echo "  make docker_pull      - Pull a remote Docker image."
@@ -19,7 +19,7 @@ help:
 # Default target
 all: help
 
-run_local:
+local:
 	Rscript -e "renv::restore();targets::tar_make()"
 
 # Build the Docker image
