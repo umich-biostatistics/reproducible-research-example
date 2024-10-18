@@ -32,8 +32,6 @@ docker_run:
 		docker run --rm -v $(RESULTS_DIR):/usr/src/app/results/ -v $(DOC_DIR):/usr/src/app/doc/ $(IMAGE_NAME); \
 	else \
 		echo "Image $(IMAGE_NAME) not found locally. Pulling from GHCR..."; \
-		$(MAKE) docker_pull; \
-		echo "Running pulled image..."; \
 		docker run --rm -v $(RESULTS_DIR):/usr/src/app/results/ -v $(DOC_DIR):/usr/src/app/doc/ $(GHCR_IMAGE); \
 	fi
 
