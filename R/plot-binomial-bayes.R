@@ -20,7 +20,7 @@ posterior_plot =
         color = "red", shape = 17, size = 3
     ) +  # Plot true parameter values
     labs(
-        title = "Simulated Estimate vs. True Parameter Value with 95% CIs",
+        title = "Estimate & 95% CI vs. True Parameter Value",
         x = "Estimate",
         y = "Parameter"
     ) +
