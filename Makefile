@@ -27,7 +27,7 @@ docker_build:
 	docker build -t $(IMAGE_NAME) .
 
 docker_run:
-	@if docker image ls | grep ^reproducible-research-example; then \
+	@if docker image ls | grep -q ^reproducible-research-example; then \
 		echo "Found local image $(IMAGE_NAME). Running it..."; \
 		docker run --rm -v $(RESULTS_DIR):/usr/src/app/results/ -v $(DOC_DIR):/usr/src/app/doc/ $(IMAGE_NAME); \
 	else \
