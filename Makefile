@@ -17,7 +17,10 @@ help:
 	@echo "  make docker_pull      - Pull a remote Docker image."
 
 # Default target
-all: docker_run
+all: help
+
+run_local:
+	Rscript -e "renv::restore();targets::tar_make()"
 
 # Build the Docker image
 docker_build:
