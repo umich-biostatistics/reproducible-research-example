@@ -1,7 +1,7 @@
 # Makefile to build and run docker image
 
 # Variables
-IMAGE_NAME = reproducible-research-example:deploy-package
+IMAGE_NAME = reproducible-research-example:latest
 GHCR_IMAGE = ghcr.io/umich-biostatistics/$(IMAGE_NAME)
 RESULTS_DIR = ./results/
 DOC_DIR = ./doc/
