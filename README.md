@@ -29,9 +29,13 @@ We can fulfill these options using **make**:
     - macOS users can try [OrbStack](https://orbstack.dev/)
 - make
     - available by default on most linux/unix-like systems
-    - [Windows Users](https://gnuwin32.sourceforge.net/packages/make.htm)
+> [!NOTE]
+> Windows users will need to use WSL or run docker commands directly. Make is not Windows friendly.
 
 ### Local Option
+
+> [!WARNING]
+> This will work best on macOS/Linux systems. Windows has not been thoroughly tested.
 
 - make (see above)
 - [JAGS](https://sourceforge.net/projects/mcmc-jags/)
@@ -49,6 +53,12 @@ We can fulfill these options using **make**:
 3. `cd reproducible-research-example`
 4. `make docker_pull`
     - if you'd like to build the image yourself, use `make docker_build && make docker_run`
+
+#### Windows Users
+
+1-3 as above
+
+4. `docker run --rm -v .\results\:/usr/src/app/results/ -v .\doc\:/usr/src/app/doc/ ghcr.io/umich-biostatistics/reproducible-research-example:deploy-package`
 
 ### Local
 
