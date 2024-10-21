@@ -8,8 +8,8 @@
 .Ruserdata
 
 # Results and report files
-results/*
-doc/report_files/
-doc/report.html
+results/**
+doc/**
+!doc/report.qmd
 _targets/
 /.quarto/
