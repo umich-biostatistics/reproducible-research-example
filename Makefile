@@ -11,7 +11,7 @@ DOC_DIR = ./doc/
 
 help:
 	@echo "Makefile Usage:"
-	@echo "  make local        - Run the R script locally."
+	@echo "  make local            - Run the R script locally."
 	@echo "  make docker_build     - Build a Docker image from the Dockerfile."
 	@echo "  make docker_run       - Run the Docker image, pull if not found."
 	@echo "  make docker_pull      - Pull a remote Docker image."
@@ -20,6 +20,7 @@ help:
 all: help
 
 local:
+	mkdir -p $(RESULTS_DIR); \
 	Rscript -e "renv::restore();targets::tar_make()"
 
 # Build the Docker image
@@ -29,9 +30,11 @@ docker_build:
 docker_run:
 	@if docker image ls | grep -q ^reproducible-research-example; then \
 		echo "Found local image $(IMAGE_NAME). Running it..."; \
+		mkdir -p $(RESULTS_DIR); \
 		docker run --rm -v $(RESULTS_DIR):/usr/src/app/results/ -v $(DOC_DIR):/usr/src/app/doc/ $(IMAGE_NAME); \
 	else \
 		echo "Image $(IMAGE_NAME) not found locally. Pulling from GHCR..."; \
+		mkdir -p $(RESULTS_DIR); \
 		docker run --rm -v $(RESULTS_DIR):/usr/src/app/results/ -v $(DOC_DIR):/usr/src/app/doc/ $(GHCR_IMAGE); \
 	fi
 
