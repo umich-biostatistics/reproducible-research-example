@@ -24,32 +24,9 @@ list(
         format = "file"
     ),
     
-    tar_target(
-        copied_posterior_samples,
-        {
-            plot
-            file.copy(from = "results/posterior-samples.rda", 
-                      to = "posterior-samples.rda", 
-                      overwrite = TRUE)
-            "posterior-samples.rda"
-        },
-        format = "file"
-    ),
-    
-    # Generate a report
-    # tar_target(
-    #     report,
-    #     {
-    #         copied_posterior_samples
-    #         system("quarto render doc/report.qmd")
-    #         "doc/report.qmd"
-    #     },
-    #     format = "file"
-    # ),
-    
     tar_quarto(
         report,
         "doc/report.qmd",
-        execute_params = list(your_param = copied_posterior_samples)
+        execute_params = list(your_param = plot)
     )
 )
